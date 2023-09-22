@@ -32,13 +32,13 @@
     <label for="password">Пароль</label>
     <input class="field" type="password" th:field="*{password}" id="password">
     <br><br>
-     <div>
+    <div>
         <label>Выбрать роль
-                <th:block th:each="role: ${roles}">
-                    <input type="checkbox" th:field="*{roles}"
-                           th:text="${role.getRole()}" th:value="${role.getId()}" class="m-2" />
-                </th:block>
-            </label>
+            <th:block th:each="role: ${roles}">
+                <input type="checkbox" th:field="*{roles}"
+                       th:text="${role.getRole()}" th:value="${role.getId()}" class="m-2"/>
+            </th:block>
+        </label>
     </div>
     <br>
     <input type="submit" value="Добавить нового пользователя"/>

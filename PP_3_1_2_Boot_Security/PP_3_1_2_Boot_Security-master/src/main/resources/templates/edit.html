@@ -10,31 +10,31 @@
 <form th:method="PUT" th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
 
     <label for="name">Имя</label>
-    <input  type="text" th:field="*{name}" id="name">
+    <input type="text" th:field="*{name}" id="name">
     <br>
     <span class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
     <br/>
 
     <label for="lastName">Фамилия</label>
-    <input  type="text" th:field="*{lastName}" id="lastName">
+    <input type="text" th:field="*{lastName}" id="lastName">
     <br>
     <span class="errors" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
     <br/>
 
     <label for="age">Возраст</label>
-    <input  type="text" th:field="*{age}" id="age">
+    <input type="text" th:field="*{age}" id="age">
     <br>
     <span class="errors" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
     <br/>
 
     <label for="email"> Email</label>
-    <input  type="text" th:field="*{email}" id="email">
+    <input type="text" th:field="*{email}" id="email">
     <br>
     <span class="errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
     <br/>
 
     <label for="username"> Логин</label>
-    <input  type="text" th:field="*{username}" id="username">
+    <input type="text" th:field="*{username}" id="username">
     <br>
     <span class="errors" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
     <br/>
@@ -44,7 +44,7 @@
     <label>Выбрать роль
         <th:block th:each="role: ${roles}">
             <input type="checkbox" th:field="*{roles}"
-                   th:text="${role.getRole()}" th:value="${role.getId()}" class="m-2" />
+                   th:text="${role.getRole()}" th:value="${role.getId()}" class="m-2"/>
         </th:block>
 
     </label>
