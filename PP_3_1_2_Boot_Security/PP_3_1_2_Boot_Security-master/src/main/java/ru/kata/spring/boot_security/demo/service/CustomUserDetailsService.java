@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User userDB = userRepository.findByUsername(username);
-        if (userDB==null) {
+        if (userDB == null) {
             throw new UsernameNotFoundException(String.format("Пользователь с именем '%s' не найден", username));
         }
         return userDB;
@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 //        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).toList();
     }
 
-    }
+}
 
 
 

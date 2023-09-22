@@ -5,7 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -33,7 +36,7 @@ public class User implements UserDetails {
     @Email(message = "Введите корректный email")
     private String email;
 
-    @Column(name="username")
+    @Column(name = "username")
     @NotNull
     private String username; //это имя нужно для входа
 
@@ -41,12 +44,12 @@ public class User implements UserDetails {
     @NotEmpty
     private String password;
 
-    @ManyToMany (fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private  List<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
     public User() {
     }
@@ -54,7 +57,7 @@ public class User implements UserDetails {
     public User(String username, String password, List<Role> roles) {
         this.username = username;
         this.password = password;
-        this.roles=roles;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -64,6 +67,7 @@ public class User implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -72,7 +76,7 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-   public void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -108,7 +112,8 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-    public List <Role> getRoles() {
+
+    public List<Role> getRoles() {
         return roles;
     }
 
@@ -120,7 +125,7 @@ public class User implements UserDetails {
         this.roles.add(role);
     }
 
-   //методы интерфейса UserDetails
+    //методы интерфейса UserDetails
 
     //возвращает коллекцию прав пользователя
     @Override
@@ -133,12 +138,13 @@ public class User implements UserDetails {
         return username;
     }
 
-//аккаунт не просрочен
+    //аккаунт не просрочен
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-//аккаунт не заблокирован
+
+    //аккаунт не заблокирован
     @Override
     public boolean isAccountNonLocked() {
         return true;
@@ -149,12 +155,12 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-//аккаунт рабочий
+
+    //аккаунт рабочий
     @Override
     public boolean isEnabled() {
         return true;
     }
-
 
 
     @Override
@@ -168,7 +174,6 @@ public class User implements UserDetails {
     public int hashCode() {
         return Objects.hash(getId());
     }
-
 
 
 }
