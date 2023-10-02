@@ -1,56 +1,39 @@
 CREATE TABLE IF NOT EXISTS users
 (
     `id`
-    BIGINT
-    NOT
-    NULL
-    AUTO_INCREMENT,
+                BIGINT
+                             NOT
+                                 NULL
+        AUTO_INCREMENT,
     `name`
-    VARCHAR
-(
-    45
-) NOT NULL,
-    `last_name` VARCHAR
-(
-    45
-) NOT NULL,
-    `age` INT NOT NULL,
-    `email` VARCHAR
-(
-    45
-) NOT NULL,
-    `username` VARCHAR
-(
-    45
-) NOT NULL,
-    `password` VARCHAR
-(
-    100
-) NOT NULL,
+                VARCHAR(45)  NOT NULL,
+    `last_name` VARCHAR(45)  NOT NULL,
+    `age`       INT          NOT NULL,
+    `email`     VARCHAR(45)  NOT NULL,
+    `username`  VARCHAR(45)  NOT NULL,
+    `password`  VARCHAR(100) NOT NULL,
     PRIMARY KEY
-(
-    `id`
-),
+        (
+         `id`
+            ),
     UNIQUE INDEX `username_UNIQUE`
-(
-    `username` ASC
-) VISIBLE);
+        (
+         `username` ASC
+            ) VISIBLE
+);
 
 CREATE TABLE IF NOT EXISTS roles
 (
     id
-    bigint
-    auto_increment,
+        bigint
+        auto_increment,
     role
-    varchar
-(
-    25
-) not null,
+        varchar(25) not null,
     primary key
-(
-    id
-)
-    );
+        (
+         id
+            )
+);
 
 create table users_roles
 (
@@ -69,11 +52,12 @@ VALUES ('Янa', 'Гулак', 33, 'gulak@mail.ru', 'yana',
         '{bcrypt}$2a$10$uoFl.ZsYRGbd1btsZpTMUOsqfOI4qpQj67T9KiVntqzHbyVjnVFUq}');
 
 
-INSERT INTO usersroles.users_roles (user_id, role_id)
+INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 2);
-    INSERT
+INSERT
 INTO users (name, last_name, age, email, username, password)
-VALUES ('Ирина', 'Еж', 24, 'yoj@mail.ru', 'irina', '{bcrypt}$2a$10$K04L6.n72wMjhWjJwTUxn.XEfL1ynqim2jlsXruCWWlGeSaK2Zyza');
+VALUES ('Ирина', 'Еж', 24, 'yoj@mail.ru', 'irina',
+        '{bcrypt}$2a$10$K04L6.n72wMjhWjJwTUxn.XEfL1ynqim2jlsXruCWWlGeSaK2Zyza');
 
 INSERT INTO users (name, last_name, age, email, username, password)
 VALUES ('Полина', 'Филипова', 37, 'filipova@mail.ru', 'polina',

@@ -16,9 +16,9 @@ import javax.validation.Valid;
 @RequestMapping(value = "/admin")
 public class SecurityAdminController {
 
+    private static final String REDIRECT = "redirect:/admin";
     private final UserService userService;
     private final RoleService roleService;
-    private static final String REDIRECT = "redirect:/admin";
 
     //
     public SecurityAdminController(UserService userService, RoleService roleService) {

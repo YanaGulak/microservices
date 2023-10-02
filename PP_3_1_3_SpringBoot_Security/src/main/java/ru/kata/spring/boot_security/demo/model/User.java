@@ -76,10 +76,6 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -125,17 +121,21 @@ public class User implements UserDetails {
         this.roles.add(role);
     }
 
-    //методы интерфейса UserDetails
-
     //возвращает коллекцию прав пользователя
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
 
+    //методы интерфейса UserDetails
+
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     //аккаунт не просрочен

@@ -7,7 +7,7 @@
 <body>
 <h1>Информация о пользователях</h1>
 
-<form th:method="GET" th:action="@{/admin/registration}" th:object="${users}">
+<form th:action="@{/admin/registration}" th:method="GET" th:object="${users}">
     <input type="submit" value="Добавить нового пользователя">
 </form>
 
@@ -32,13 +32,13 @@
         <td th:utext="${user.getAuthorities()}">Роли</td>
 
         <td>
-            <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:object="${user}">
+            <form th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:method="GET" th:object="${user}">
                 <input type="submit" value="Изменить">
             </form>
         </td>
 
         <td>
-            <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+            <form th:action="@{/admin/delete/{id}(id=${user.getId()})}" th:method="DELETE">
                 <input type="submit" value="Удалить">
             </form>
         </td>
