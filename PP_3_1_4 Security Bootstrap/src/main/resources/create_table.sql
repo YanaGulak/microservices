@@ -64,21 +64,27 @@ create table users_roles
         foreign key (user_id) references users (id)
 );
 
-INSERT INTO users (name, last_name, age, email, username, password)
-VALUES ('Янa', 'Гулак', 33, 'gulak@mail.ru', 'yana',
-        '$2a$08$GTlgvaJCzVSN2bOPsE7U1OrzPncCL9cYStHvb8RZswb/.PghZPaI6}');
-
 INSERT INTO roles (role)
 VALUES ('ROLE_USER');
 
 INSERT INTO roles (role)
 VALUES ('ROLE_ADMIN');
 
+INSERT INTO users (name, last_name, age, email, username, password)
+VALUES ('Админ', 'Главный', 45, 'admin@mail.ru', 'admin',
+        '$2a$08$ilAYFPbxbFB877kzf8kDBO2l90Uwkf8oiiS6Iknq1MkNPmhJ0ReFC');
+
+INSERT INTO users (name, last_name, age, email, username, password)
+VALUES ('Пользователь', 'Обычный',25, 'user@mail.ru', 'user','$2a$08$2K/.Qv6DM.7aBAsllZP51uOMrA77sLNFF3xp8nZM0QSLRHy0zophi');
+
+INSERT INTO users_roles (user_id, role_id)
+VALUES (1, 1);
+
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 2);
 
 INSERT INTO users_roles (user_id, role_id)
-VALUES (1, 1);
+VALUES (2, 1);
 
     INSERT
 INTO users (name, last_name, age, email, username, password)
@@ -96,3 +102,8 @@ INSERT INTO usersroles.users (name, last_name, age, email, username, password)
 VALUES ('Максим', 'Мамонтов', 22, 'mamontov@mail.ru', 'maksim',
         '$2a$10$Suk22vdBTW7TVCZkzZcvgOD66zceRBPgddGsFK9FcBBj.y0yG0zty');
 
+INSERT INTO users_roles (user_id, role_id)
+VALUES (1, 2);
+
+INSERT INTO users_roles (user_id, role_id)
+VALUES (1, 1);

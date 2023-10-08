@@ -26,11 +26,13 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Transactional
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    @Transactional
     @Override
     public User findUserById(Long id) {
         Optional<User> userFromDB = userRepository.findById(id);
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
         return userFromDB.get();
     }
 
+    @Transactional
     @Override
     public User findByUsername(String username) {
         User userDB = userRepository.findByUsername(username);

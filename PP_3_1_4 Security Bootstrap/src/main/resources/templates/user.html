@@ -14,9 +14,9 @@
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <div class="container-fluid text-white">
             <span class="navbar-header">
-                <span th:text="${user.getUsername()}"></span>
+                <span th:text="${principalUser.getUsername()}"></span>
                 <span> with roles: </span>
-                <span th:each="role : ${user.getRoles()}"
+                <span th:each="role : ${principalUser.getRoles()}"
                       th:text="${role.getRole().replace('ROLE_', '') + ' '}">
                 </span>
             </span>
@@ -64,14 +64,14 @@
             </tr>
             <tbody>
             <tr>
-                <td th:text="${user.id}">Id</td>
-                <td th:text="${user.name}">Имя</td>
-                <td th:text="${user.lastName}">Фамилия</td>
-                <td th:text="${user.age}">Возраст</td>
-                <td th:text="${user.email}">Email</td>
-                <td th:text="${user.username}">Email</td>
+                <td th:text="${principalUser.id}">Id</td>
+                <td th:text="${principalUser.name}">Имя</td>
+                <td th:text="${principalUser.lastName}">Фамилия</td>
+                <td th:text="${principalUser.age}">Возраст</td>
+                <td th:text="${principalUser.email}">Email</td>
+                <td th:text="${principalUser.username}">Email</td>
                 <td>
-         <span th:each="role : ${user.getRoles()}"
+         <span th:each="role : ${principalUser.getRoles()}"
                th:switch="${role.getRole()}">
                <span th:case="'ROLE_ADMIN'">ADMIN</span>
                <span th:case="'ROLE_USER'">USER</span>

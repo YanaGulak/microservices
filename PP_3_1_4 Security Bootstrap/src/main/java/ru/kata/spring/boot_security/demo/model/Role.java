@@ -52,19 +52,17 @@ String roleToPrint = role.replace("ROLE_", "");
         return getRole();
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(role, role.getRole());
+        if (!(o instanceof Role role)) return false;
+        return Objects.equals(getId(), role.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getRole());
+        return Objects.hash(getId()*31);
     }
+
+
 }

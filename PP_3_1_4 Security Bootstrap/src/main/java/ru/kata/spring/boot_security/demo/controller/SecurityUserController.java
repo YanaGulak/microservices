@@ -12,7 +12,7 @@ public class SecurityUserController {
     //логика отображения персональной страницы пользователя
     @GetMapping("/user")
     public String showUserInfo(@AuthenticationPrincipal User principaluser, ModelMap model) {
-        model.addAttribute("user", principaluser);
+        model.addAttribute("principalUser", principaluser);
         model.addAttribute("roles", principaluser.getAuthorities());
         return "/user";
     }
