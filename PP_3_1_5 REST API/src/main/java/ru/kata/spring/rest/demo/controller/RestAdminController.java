@@ -3,6 +3,7 @@ package ru.kata.spring.rest.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import ru.kata.spring.rest.demo.service.RoleService;
 import ru.kata.spring.rest.demo.service.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +40,15 @@ public class RestAdminController {
     public ResponseEntity<List<User>> showUsers() {
         System.out.println(userService.findAll());
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/admin_info")
+    public ResponseEntity<User> getAdminInfo(Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        if (user == null) {
+            throw new UsernameNotFoundException("User with username = " + principal.getName() + " not found");
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping(value = "/roles")

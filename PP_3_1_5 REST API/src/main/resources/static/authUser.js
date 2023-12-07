@@ -1,6 +1,6 @@
 const urlUser = 'http://localhost:8080/api/user'
 const navbarBrandUser = document.getElementById('navbarBrandUser'); //хедер
-const tableCurUser = document.getElementById('tableCurUser');//таблица
+const tableAuthUser = document.getElementById('tableAuthUser');//таблица
 
 function showCurrentUser() {
     console.log('Загружаю данные пользователя...')
@@ -24,7 +24,7 @@ function showUserInfo(user){
                         <td>${user.username}</td>
                        <td>${user.roles.map(e => " " + e.role.substring(5))}</td>
                         </tr>`
-    tableCurUser.innerHTML=result
+    tableAuthUser.innerHTML=result
     navbarBrandUser.innerHTML = `<b><span>${user.username}</span></b>
                              <span>with roles:</span>
                              <span>${user.roles.map(e => " " + e.role.substring(5))}</span>`
