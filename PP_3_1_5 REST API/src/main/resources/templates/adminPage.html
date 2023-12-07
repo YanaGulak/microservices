@@ -16,7 +16,8 @@
 <header>
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <div class="container-fluid text-white">
-    <span class="navbar-brand" id="navbarBrandAdmin">
+  <!--  <span class="navbar-brand" id="navbarBrandAdmin"> -->
+         <span class="navbar-brand" id="navbarBrandUser">
         <!--script-->
     </span>
             <form th:action="@{/logout}" th:method="POST">
@@ -364,7 +365,7 @@
                                         <h2><b>User information-page</b></h2>
                                         <nav class="navbar navbar-light bg-light">
                                             <div class="container-fluid">
-                                                <h5><b>About Admin User</b></h5>
+                                                <h5><b>About User</b></h5>
                                             </div>
                                         </nav>
                                         <table class="table table-striped">
@@ -379,8 +380,9 @@
                                                 <th scope="col">Role</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="tableAdmin">
-                                            <!-- СКРИПТ -->
+                                         <!--   <tbody id="tableAdmin">-->
+                                            <tbody id="tableAuthUser">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -397,6 +399,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/admin.js"></script>
+<script src="/authUser.js"></script>
 
 </body>
 </html>
