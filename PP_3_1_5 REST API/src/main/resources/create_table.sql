@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS roles
 );
 
 
-create table users_roles
+create table if not exists users_roles
 (
     user_id bigint not null,
     role_id bigint null,

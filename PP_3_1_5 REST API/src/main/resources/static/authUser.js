@@ -1,4 +1,4 @@
-const urlUser = 'http://localhost:8080/api/user'
+const urlUser = 'http://localhost:8080/api/user/'
 const navbarBrandUser = document.getElementById('navbarBrandUser'); //хедер
 const tableAuthUser = document.getElementById('tableAuthUser');//таблица
 
