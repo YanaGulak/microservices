@@ -1,8 +1,5 @@
 package ru.kata.spring.rest.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,11 +22,11 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "name")
-    @NotEmpty(message ="Name can't be empty")
+    @NotEmpty(message = "Name can't be empty")
     private String name; //это настоящее имя человека
 
     @Column(name = "last_name")
-    @NotEmpty(message ="Last name can't be empty")
+    @NotEmpty(message = "Last name can't be empty")
     private String lastName;
 
     @Column(name = "age")
@@ -42,15 +39,14 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "username")
-    @NotEmpty(message ="Username can't be empty")
+    @NotEmpty(message = "Username can't be empty")
     private String username; //это имя нужно для входа
 
     @Column(name = "password")
-    @NotEmpty(message ="Password can't be empty")
+    @NotEmpty(message = "Password can't be empty")
     private String password;
 
-    //используется в связанных сущностях, для сериализации и десериализации JSON
-    //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "users_roles",

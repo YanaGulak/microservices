@@ -8,11 +8,11 @@ function showCurrentUser() {
         .then((response) => response.json())
         .then((data) => {
             showUserInfo(data)
-        }).catch((ex)=>console.error(ex))
+        }).catch((ex) => console.error(ex))
     console.log('Информация о пользователе загружена')
 }
 
-function showUserInfo(user){
+function showUserInfo(user) {
     let result = ''
     result += `
          <tr>
@@ -24,7 +24,7 @@ function showUserInfo(user){
                         <td>${user.username}</td>
                        <td>${user.roles.map(e => " " + e.role.substring(5))}</td>
                         </tr>`
-    tableAuthUser.innerHTML=result
+    tableAuthUser.innerHTML = result
     navbarBrandUser.innerHTML = `<b><span>${user.username}</span></b>
                              <span>with roles:</span>
                              <span>${user.roles.map(e => " " + e.role.substring(5))}</span>`

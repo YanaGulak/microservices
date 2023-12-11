@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    //из UserService
     @Override
     public List<User> findAll() {
         List<User> users = userRepository.findAll();
@@ -45,7 +44,6 @@ public class UserServiceImpl implements UserService {
         }
         return userFromDB;
     }
-
 
 
     @Transactional

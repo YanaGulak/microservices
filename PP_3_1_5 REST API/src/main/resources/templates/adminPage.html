@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <title>Admin</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" rel="stylesheet">
 
 </head>
 
@@ -16,12 +16,10 @@
 <header>
     <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
         <div class="container-fluid text-white">
-            <!--  <span class="navbar-brand" id="navbarBrandAdmin"> -->
             <span class="navbar-brand" id="navbarBrandUser">
-        <!--script-->
-    </span>
+            </span>
             <form th:action="@{/logout}" th:method="POST">
-                <button type="submit" class="btn btn-dark">Logout</button>
+                <button class="btn btn-dark" type="submit">Logout</button>
             </form>
         </div>
     </nav>
@@ -55,14 +53,14 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button aria-controls="nav-users_table" aria-selected="true" class="nav-link active"
-                                        data-target="#nav-users_table" data-toggle="tab" id="nav-users-tab"
+                                        data-target="#navUsersTab" data-toggle="tab" id="nav-users-tab"
                                         role="tab" type="button">Users table
                                 </button>
 
                                 <!--вкладка New User-->
 
                                 <button aria-controls="nav-new_user" aria-selected="false" class="nav-link"
-                                        data-target="#nav-new_user" data-toggle="tab" id="nav-new_user-tab"
+                                        data-target="#navNewUser" data-toggle="tab" id="nav-new_user-tab"
                                         role="tab"
                                         type="button">New User
                                 </button>
@@ -71,11 +69,11 @@
 
                         <!--USERS LIST-->
                         <div class="tab-content" id="nav-tabContent">
-                            <div aria-labelledby="nav-users_table-tab" class="tab-pane fade show active"
+                            <div aria-labelledby="navUsersTab" class="tab-pane fade show active"
                                  id="nav-users_table"
                                  role="tabpanel">
                                 <h3><b>All users</b></h3>
-                                <table id="tableUsers" class="table mt-2 table-striped table-bordered">
+                                <table class="table mt-2 table-striped table-bordered" id="tableUsers">
                                     <thead>
                                     <tr class="text-center">
                                         <th scope="col">Id</th>
@@ -94,16 +92,16 @@
                                 </table>
 
                                 <!--EDIT MODAL-->
-                                <div class="modal fade" aria-hidden="true" aria-labelledby="EditModalLabel"
+                                <div aria-hidden="true" aria-labelledby="EditModalLabel" class="modal fade"
                                      id="editModal"
                                      tabindex="-1">
                                     <div class="modal-dialog modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header bg-primary text-white text-center">
                                                 <h5 class="modal-title" id="EditModalLabel">Edit user</h5>
-                                                <button type="button"
-                                                        class="btn-close"
-                                                        data-dismiss="modal">&times;
+                                                <button class="btn-close"
+                                                        data-dismiss="modal"
+                                                        type="button">&times;
                                                 </button>
                                             </div>
 
@@ -111,12 +109,12 @@
                                                 <div class="d-flex justify-content-center align-items-center container">
                                                     <form id="editForm">
                                                         <div class="mb-3">
-                                                            <label for="edit-id"
-                                                                   class="col-form-label"><b>Id</b></label>
+                                                            <label class="col-form-label"
+                                                                   for="edit-id"><b>Id</b></label>
                                                             <input class="form-control"
                                                                    id="edit-id"
                                                                    name="id"
-                                                                   type="text" readonly/>
+                                                                   readonly type="text"/>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="edit-name"><b>Name</b></label>
@@ -163,14 +161,14 @@
                                                             <div class="form-group">
                                                                 <label for="edit-roles"><b>Check role</b></label>
                                                                 <select class="form-select"
-                                                                        style="width: 100px; height: 50px;"
-                                                                        name="roles"
-                                                                        id="edit-roles" multiple>
-                                                                    <option value="ROLE_USER"
-                                                                            style="text-align: center;">USER
+                                                                        id="edit-roles"
+                                                                        multiple
+                                                                        name="roles" style="width: 100px; height: 50px;">
+                                                                    <option style="text-align: center;"
+                                                                            value="ROLE_USER">USER
                                                                     </option>
-                                                                    <option value="ROLE_ADMIN"
-                                                                            style="text-align: center;">
+                                                                    <option style="text-align: center;"
+                                                                            value="ROLE_ADMIN">
                                                                         ADMIN
                                                                     </option>
                                                                 </select>
@@ -179,8 +177,8 @@
                                                         <div class="modal-footer">
                                                             <button class="btn btn-secondary"
                                                                     data-dismiss="modal"
-                                                                    type="button"
-                                                                    id="editClose">Close
+                                                                    id="editClose"
+                                                                    type="button">Close
                                                             </button>
                                                             <button class="btn btn-primary" type="submit"
                                                                     value="Edit">Save
@@ -194,16 +192,16 @@
                                 </div>
 
                                 <!--DELETE MODAL-->
-                                <div class="modal fade" aria-hidden="true" aria-labelledby="DeleteModalLabel"
+                                <div aria-hidden="true" aria-labelledby="DeleteModalLabel" class="modal fade"
                                      id="deleteModal"
                                      tabindex="-1">
                                     <div class="modal-dialog modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header bg-primary text-white text-center">
                                                 <h5 class="modal-title" id="DeleteModalLabel">Delete user</h5>
-                                                <button type="button"
-                                                        class="btn-close"
-                                                        data-dismiss="modal">&times;
+                                                <button class="btn-close"
+                                                        data-dismiss="modal"
+                                                        type="button">&times;
                                                 </button>
                                             </div>
 
@@ -212,52 +210,52 @@
                                                 <div class="d-flex justify-content-center align-items-center container">
                                                     <form id="deleteForm">
                                                         <div class="mb-3">
-                                                            <label for="delete-id"
-                                                                   class="col-form-label"><b>Id</b></label>
+                                                            <label class="col-form-label"
+                                                                   for="delete-id"><b>Id</b></label>
                                                             <input class="form-control"
                                                                    id="delete-id"
                                                                    name="id"
-                                                                   type="text" readonly/>
+                                                                   readonly type="text"/>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="delete-name"><b>Name</b></label>
                                                             <input class="form-control"
                                                                    id="delete-name"
                                                                    name="name"
-                                                                   type="text" readonly/>
+                                                                   readonly type="text"/>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="delete-lastName"><b>Last Name</b></label>
                                                             <input class="form-control" id="delete-lastName"
                                                                    name="lastName"
-                                                                   type="text" readonly/>
+                                                                   readonly type="text"/>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="delete-age"><b>Age</b></label>
                                                             <input class="form-control"
                                                                    id="delete-age"
                                                                    name="age"
-                                                                   type="number" readonly/>
+                                                                   readonly type="number"/>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="delete-email"><b>Email</b></label>
                                                             <input class="form-control"
                                                                    id="delete-email"
                                                                    name="email"
-                                                                   type="text" readonly/>
+                                                                   readonly type="text"/>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="delete-username"><b>Login</b></label>
                                                             <input class="form-control"
                                                                    id="delete-username"
                                                                    name="username"
-                                                                   type="text" readonly/>
+                                                                   readonly type="text"/>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-secondary"
                                                                     data-dismiss="modal"
-                                                                    type="button"
-                                                                    id="deleteClose">Close
+                                                                    id="deleteClose"
+                                                                    type="button">Close
                                                             </button>
                                                             <button class="btn btn-primary" type="submit"
                                                                     value="Delete">Delete
@@ -272,65 +270,63 @@
 
                                 <!-- NEW USER-->
                                 <div aria-labelledby="nav-new_user-tab" class="tab-pane fade"
-                                     id="nav-new_user"
+                                     id="navNewUser"
                                      role="tabpanel">
-                                    <p class="text-center"><b>New user</b></p>
-                                    <!--    <h3 class="text-center"><b>New user</b></h3>-->
-
-                                    <div class="d-flex justify-content-center align-items-center container">
-                                        <div class="row">
+                                    <div class="card text-center" style="width: 100%;">
+                                        <h4 class="card-header"><b>New user</b></h4>
+                                        <div class="card-body d-flex justify-content-center text-center container">
                                             <form id="newUserForm">
                                                 <div class="mb-3 text-center">
                                                     <label for="newName"><b>Name</b></label>
                                                     <input class="form-control" id="newName"
-                                                           type="text" placeholder="Name"
-                                                           required/>
+                                                           placeholder="Name" required
+                                                           type="text"/>
 
                                                 </div>
                                                 <div class="mb-3 text-center">
                                                     <label for="newLastName"><b>Last
                                                         Name</b></label>
                                                     <input class="form-control" id="newLastName"
-                                                           type="text" placeholder="Last name"
-                                                           required/>
+                                                           placeholder="Last name" required
+                                                           type="text"/>
                                                 </div>
                                                 <div class="mb-3 text-center">
                                                     <label for="newAge"><b>Age</b></label>
                                                     <input class="form-control" id="newAge"
-                                                           type="number" placeholder="Age"
-                                                           required/>
+                                                           placeholder="Age" required
+                                                           type="number"/>
 
                                                 </div>
                                                 <div class="mb-3 text-center">
                                                     <label for="newEmail"><b>Email</b></label>
                                                     <input class="form-control" id="newEmail"
-                                                           type="text" placeholder="Email"
-                                                           required/>
+                                                           placeholder="Email" required
+                                                           type="text"/>
                                                 </div>
                                                 <div class="mb-3 text-center">
                                                     <label for="newUsername"><b>Login</b></label>
                                                     <input class="form-control" id="newUsername"
-                                                           type="text" placeholder="Login"
-                                                           required/>
+                                                           placeholder="Login" required
+                                                           type="text"/>
                                                 </div>
                                                 <div class="mb-3 text-center">
                                                     <label for="newPassword"><b>Password</b></label>
                                                     <input class="form-control" id="newPassword"
-                                                           type="text" placeholder="Password"
-                                                           required/>
+                                                           placeholder="Password" required
+                                                           type="text"/>
                                                 </div>
 
                                                 <div class="mb-3 text-center">
                                                     <div class="form-group">
                                                         <label for="newRoles"><b>Check role</b></label>
                                                         <select class="form-select"
-                                                                style="width: 100px; height: 50px;"
-                                                                name="newRoles"
-                                                                id="newRoles" multiple>
-                                                            <option value="1" style="text-align: center;">
+                                                                id="newRoles"
+                                                                multiple
+                                                                name="newRoles" style="width: 100px; height: 50px;">
+                                                            <option style="text-align: center;" value="1">
                                                                 USER
                                                             </option>
-                                                            <option value="2" style="text-align: center;">
+                                                            <option style="text-align: center;" value="2">
                                                                 ADMIN
                                                             </option>
                                                         </select>
@@ -338,14 +334,13 @@
                                                 </div>
                                                 <div>
                                                     <!--При нажатии на кнопку Add user вызовется метод createNewUser() в js-->
-                                                    <button class="btn btn-info" type="submit"
+                                                    <button class="btn btn-primary" type="submit"
                                                             value="Add user">
                                                         Add user
                                                     </button>
                                                     <button class="btn btn-secondary"
-                                                            data-dismiss="modal"
-                                                            type="button"
-                                                            id="newClose">Close
+                                                            id="newClose"
+                                                            type="button">Close
                                                     </button>
                                                 </div>
                                             </form>
@@ -354,9 +349,9 @@
                                 </div>
 
                                 <!---------------- PERSONAL USER PAGE-------->
-                                <div class="tab-pane fade" id="v-pills-user"
+                                <div aria-labelledby="v-pills-userAdmin-tab" class="tab-pane fade"
+                                     id="v-pills-user"
                                      role="tabpanel"
-                                     aria-labelledby="v-pills-userAdmin-tab"
                                      tabindex="0">
                                     <h2><b>User information-page</b></h2>
                                     <nav class="navbar navbar-light bg-light">

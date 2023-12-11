@@ -3,23 +3,17 @@ package ru.kata.spring.rest.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.rest.demo.util.UserNotCreatedException;
-import ru.kata.spring.rest.demo.util.UserNotFoundException;
-import ru.kata.spring.rest.demo.model.Role;
 import ru.kata.spring.rest.demo.model.User;
 import ru.kata.spring.rest.demo.service.RoleService;
 import ru.kata.spring.rest.demo.service.UserService;
+import ru.kata.spring.rest.demo.util.UserNotCreatedException;
+import ru.kata.spring.rest.demo.util.UserNotFoundException;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
-import java.util.Set;
-
-import static java.lang.String.format;
 
 
 @RestController
@@ -42,36 +36,22 @@ public class RestAdminController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/admin_info")
-    public ResponseEntity<User> getAdminInfo(Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        if (user == null) {
-            throw new UsernameNotFoundException("User with username = " + principal.getName() + " not found");
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/roles")
-    public ResponseEntity<List<Role>> showRoles() {
-        return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
-    }
-
-
     //получаем пользователя по id
     @GetMapping("/{id}")
     public ResponseEntity<User> findUser(@PathVariable("id") Long id) throws UserNotFoundException {
-        if (userService.findUserById(id)==null)
-        { throw new UserNotFoundException("User with id = " + id + " not found");}
-         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
+        if (userService.findUserById(id) == null) {
+            throw new UserNotFoundException("User with id = " + id + " not found");
+        }
+        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> saveUser (@RequestBody @Valid User user, BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> saveUser(@RequestBody @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error:errors
-                 ) {
+            for (FieldError error : errors
+            ) {
                 //Создадим строку с указанием полей и сообщений об ошибках
                 errorMsg.append(error.getField()).append("-").append(error.getDefaultMessage())
                         .append(";");
@@ -83,18 +63,18 @@ public class RestAdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-        @PutMapping("/{id}")
-        public ResponseEntity<HttpStatus> updateUser (@RequestBody @Valid User user,
-                @PathVariable("id") Long id){
-                userService.update(user, id);
-                return new ResponseEntity<>(HttpStatus.OK);
-
-            }
-
-        @DeleteMapping("/{id}")
-        public ResponseEntity<HttpStatus> deleteUser (@PathVariable("id") Long id){
-            userService.deleteUserById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+    @PutMapping("/{id}")
+    public ResponseEntity<HttpStatus> updateUser(@RequestBody @Valid User user,
+                                                 @PathVariable("id") Long id) {
+        userService.update(user, id);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+}

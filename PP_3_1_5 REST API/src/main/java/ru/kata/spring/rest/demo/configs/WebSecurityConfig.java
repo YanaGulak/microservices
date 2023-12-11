@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/users/**","/api/user").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                .antMatchers("/api/users/**", "/api/user").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
                 .and().logout()
@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .permitAll()
 //                .and()
 //                .logout()
+//        .logoutSuccessUrl("/login")
 //                .permitAll();
 
     }
@@ -76,20 +77,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(8);
     }
 }
-/*  `@Override
-protected void configure(HttpSecurity http) throws Exception {
-http.authorizeRequests()
-.antMatchers("/api/**").hasRole("ADMIN")
-.antMatchers("/**")
-.permitAll()
-.anyRequest()
-.authenticated()
- .and()
- .formLogin()
- .permitAll()
- .and()
- .logout()
- .permitAll()
- .and()
- .httpBasic();
- http.cors().disable().csrf().disable(); }`*/

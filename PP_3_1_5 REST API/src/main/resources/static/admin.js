@@ -1,6 +1,5 @@
 const URL = 'http://localhost:8080/api/users/'
 const usersTable = document.getElementById('usersTable')
-let newForm = document.forms['newUserForm'] //форма для создания юзера
 
 getAllUsers()
 
@@ -46,8 +45,8 @@ function showTable(users) {
 
 //========CREATE=========
 
+let newForm = document.forms['newUserForm'] //форма для создания юзера
 //отсюда будем записывать роли для пользователей
-
 let list = [
     {id: 1, role: "ROLE_USER"},
     {id: 2, role: "ROLE_ADMIN"}
@@ -65,7 +64,7 @@ function createNewUser() {
     newForm.addEventListener('submit', (event) => {
         event.preventDefault();
 //скрыть форму после добавления юзера
-        document.getElementById('nav-new_user').addEventListener('click', function () {
+        document.getElementById('navNewUser').addEventListener('click', function () {
             newForm.style.display = 'none'
         });
 
@@ -192,7 +191,6 @@ function editUser() {
 }
 
 //============DELETE=============
-
 
 const deleteForm = document.forms['deleteForm']
 deleteUser()
