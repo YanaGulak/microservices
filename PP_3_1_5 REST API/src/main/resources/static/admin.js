@@ -1,42 +1,3 @@
-// const urlInfo = 'http://localhost:8080/api/users/admin_info'
-// const navbarBrandAdmin = document.getElementById('navbarBrandAdmin') //хедер
-// const adminTable = document.getElementById('tableAdmin') //личная инфа админа
-// //таблица юзеров
-// //let newForm = document.getElementById('newUserForm') //форма для создания юзера
-//
-//
-//
-// function getAdminInfo() {
-//     console.log('Загружаю страницу администратора...')
-//     fetch(urlInfo)
-//         .then((res) => res.json())
-//         .then(data => {
-//             showAdminPage(data)
-//             console.log("Страница админа загружена")
-//         }).catch((ex) => console.error(ex))
-// }
-//
-// function showAdminPage(userAdmin) {
-//     let result = '';
-// debugger
-//     result += `<tr>
-//             <td>${userAdmin.id}</td>
-//             <td>${userAdmin.name}</td>
-//             <td>${userAdmin.lastName}</td>
-//             <td>${userAdmin.age}</td>
-//             <td>${userAdmin.email}</td>
-//             <td>${userAdmin.username}</td>
-//             <td>${userAdmin.roles.map(role => " " + role.role.substring(5))}</td>
-//             </tr>`;
-//     adminTable.innerHTML = result
-//     navbarBrandAdmin.innerHTML = `<b><span>${userAdmin.username}</span></b>
-//                              <span>with roles:</span>
-//                              <span>${userAdmin.roles.map(role => " " + role.role.substring(5))}</span>`
-//
-// }
-//
-// getAdminInfo()
-
 const URL = 'http://localhost:8080/api/users/'
 const usersTable = document.getElementById('usersTable')
 let newForm = document.forms['newUserForm'] //форма для создания юзера
@@ -83,6 +44,9 @@ function showTable(users) {
     usersTable.innerHTML = result
 }
 
+//========CREATE=========
+
+//отсюда будем записывать роли для пользователей
 
 let list = [
     {id: 1, role: "ROLE_USER"},
@@ -90,19 +54,6 @@ let list = [
 ]
 
 createNewUser()
-
-//выбор роли из выпадающего списка из newForm
-// function checkRolesForNewAndEdit() {
-//     let roles = []
-//     let options = document.querySelector('#newRoles').options
-//     console.log(options)
-//     for (let i = 0; i < options.length; i++) {
-//         if (options[i].selected) {
-//             roles.push(list[i])
-//         }
-//     }
-//     return roles
-// }
 
 //Сохранение юзера
 // Отправка заполненной формы на сервер
@@ -113,8 +64,12 @@ createNewUser()
 function createNewUser() {
     newForm.addEventListener('submit', (event) => {
         event.preventDefault();
+//скрыть форму после добавления юзера
+        document.getElementById('nav-new_user').addEventListener('click', function () {
+            newForm.style.display = 'none'
+        });
 
-        //добавляем роли новому пользователю
+        //добавляем роли новому пользователю из листа
         let roleslist = []
         let options = document.querySelector('#newRoles').options
         for (let i = 0; i < options.length; i++) {
@@ -142,10 +97,11 @@ function createNewUser() {
             })
             .then((response) => {
                 if (response.ok) {
+                    getAllUsers() //обновляем таблицу пользователей
                     alert('Новый пользователь успешно сохранен')
                     newForm.reset() //очищаем форму
-                    document.getElementById('nav-users-tab').click() //клик по вкладке Users Table
-                    getAllUsers() //обновляем таблицу пользователей
+                    $('#usersTable').click()
+
                 }
             }).catch(ex => console.error('Ошибка отправки формы: ', ex))
     })
@@ -153,10 +109,7 @@ function createNewUser() {
 
 //============EDIT=============
 
-
 const editForm = document.forms['editForm']
-
-
 editUser()
 
 function getEditModal(id) {
@@ -180,18 +133,11 @@ function getEditModal(id) {
                 editForm.username.value = editUser.username
                 editForm.password.value = editUser.password
                 document.getElementById('#edit-roles').value = editUser.roles
-debugger
-                const options = document.querySelector('#edit-roles').options
 
+                const options = document.querySelector('#edit-roles').options
                 for (let i = 0; i < options.length; i++) {
-                    if (options[i].value === userEdit.roles[i].id) {
+                    if (options[i].value === userEdit.roles[i].role) {
                         options[i].selected = true
-                        //если последний элемент - выходим
-                        if (i === options.length - 1) {
-                            break
-                        }
-                    } else if (options[i + 1].value === userEdit.roles[i].id) {
-                        options[i + 1].selected = true
                     }
                 }
             })
@@ -204,13 +150,15 @@ function editUser() {
 
         //добавляем выбранные в форме роли для edit
         let roleslist = $("#edit-roles").val()
-
-       // let options = document.querySelector('#edit-roles').options
         for (let i = 0; i < roleslist.length; i++) {
-            if (roleslist[i].value===list[i].id) {
-                roleslist.push(list[i])
+            if (roleslist[i] === 'ROLE_USER') {
+                roleslist[i] = list[i]
+            }
+            if (roleslist[i] === 'ROLE_ADMIN') {
+                roleslist[i] = list[i]
             }
         }
+
         let editURL = URL + editForm.id.value
 
         fetch(editURL, {
@@ -278,7 +226,7 @@ function deleteUser() {
         event.preventDefault();
 
         let deleteURL = URL + deleteForm.id.value
-        alert("Данные пользователя будут уалены. Продолжить?")
+        alert("Данные пользователя будут удалены безвозвратно. Продолжить?")
 
         fetch(deleteURL, {
             method: 'DELETE',
