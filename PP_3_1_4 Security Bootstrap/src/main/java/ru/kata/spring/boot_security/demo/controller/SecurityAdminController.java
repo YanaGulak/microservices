@@ -20,15 +20,14 @@ public class SecurityAdminController {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
+
     private static final String REDIRECT = "redirect:/admin";
 
 
-    public SecurityAdminController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public SecurityAdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
-    }
+           }
 
 
     @GetMapping()

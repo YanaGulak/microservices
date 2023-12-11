@@ -36,13 +36,13 @@
         <!--- на странице будет 2 колонки шириной 3 и 9 (макс.ширина 12)--->
         <div class="col-3">
             <!--- Устанавливаем навигацию с вертикальными "подушками"--->
-            <div aria-orientation="vertical" class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-                <a aria-controls="v-pills-admin" aria-selected="true"
-                   class="nav-link" href="/admin"
-                   role="tab" sec:authorize="hasAuthority('ROLE_ADMIN')">Admin</a>
-                <a aria-controls="v-pills-user" aria-selected="false" class="nav-link active"
-                   href="/user"
-                   role="tab" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')">User</a>
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" href="/admin"
+                   sec:authorize="hasAuthority('ROLE_ADMIN')" role="tab"
+                   aria-controls="v-pills-admin" aria-selected="true">Admin</a>
+                <a class="nav-link" href="/user" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')"
+                   role="tab"
+                   aria-controls="v-pills-user" aria-selected="false">User</a>
             </div>
         </div>
 
@@ -63,7 +63,7 @@
 
                                 <!--вкладка New User-->
 
-                                <button aria-controls="nav-new_user" aria-selected="true" class="nav-link"
+                                <button aria-controls="nav-new_user" aria-selected="false" class="nav-link"
                                         data-bs-target="#nav-new_user" data-bs-toggle="tab" id="nav-new_user-tab"
                                         role="tab"
                                         type="button">New User
@@ -98,8 +98,8 @@
                                         <td th:text="${user.getEmail()}">Email</td>
                                         <td th:text="${user.getUsername()}">Login</td>
                                         <td>
-                                            <span th:each="role : ${user.getRoles()}"
-                                                  th:switch="${role.getRole()}">
+                                            <span th:each="role : ${user.getAuthorities()}"
+                                                  th:switch="${role.role()}">
                                     <span th:case="'ROLE_ADMIN'">ADMIN</span>
                                     <span th:case="'ROLE_USER'">USER</span>
                                     </span>
@@ -107,22 +107,22 @@
 
                                         <!-- Кнопки  для открытия модальных окон Edit и Delete-->
                                         <td>
-                                            <button class="btn btn-primary" data-bs-toggle="modal"
-                                                    th:data-bs-target="${'#editModal'+user.getId()}"
+                                            <button class="btn btn-primary" data-toggle="modal"
+                                                    th:data-target="${'#editModal'+user.getId()}"
                                                     type="button">Edit
                                             </button>
                                         </td>
 
                                         <td>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                    th:data-bs-target="${'#deleteModal'+user.getId()}"
+                                            <button class="btn btn-danger" data-toggle="modal"
+                                                    th:data-target="${'#deleteModal'+user.getId()}"
                                                     type="button">Delete
                                             </button>
                                         </td>
 
 
                                         <!-- Модальное окно Edit-->
-                                        <div class="modal fade" aria-hidden="false"
+                                        <div class="modal fade" tabindex="-1" aria-hidden="true"
                                              aria-labelledby="EditModalLabel"
                                              id="editModal"
                                              th:id="${'editModal'+user.getId()}">
@@ -131,7 +131,7 @@
 
                                                     <!-- Заголовок модального окна Edit-->
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Edit user</h5>
+                                                        <h5 class="modal-title" id="EditModalLabel">Edit user</h5>
                                                         <button class="btn-close"
                                                                 data-bs-dismiss="modal"
                                                                 type="button" aria-label="Close"></button>
@@ -217,7 +217,8 @@
 
 
                                         <!-- Модальное окно Delete-->
-                                        <div class="modal" aria-hidden="false" aria-labelledby="exampleModalLabel"
+                                        <div class="modal" tabindex="-1" aria-hidden="true"
+                                             aria-labelledby="deleteModalLabel"
                                              id="deleteModal"
                                              th:id="${'deleteModal'+user.getId()}">
                                             <div class="modal-dialog modal-dialog-scrollable">
@@ -351,7 +352,7 @@
                                                                th:type="password"
                                                                placeholder="Password" required/>
                                                         <br>
-                                                        <span><b>Role</b></span>
+                                                        <label><b>Role</b></label>
                                                         <select aria-label="Default select example"
                                                                 class="form-select"
                                                                 th:name="roles" required>

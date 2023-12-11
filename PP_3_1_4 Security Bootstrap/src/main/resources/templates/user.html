@@ -64,14 +64,14 @@
             </tr>
             <tbody>
             <tr>
-                <td th:text="${principalUser.id}">Id</td>
-                <td th:text="${principalUser.name}">Имя</td>
-                <td th:text="${principalUser.lastName}">Фамилия</td>
-                <td th:text="${principalUser.age}">Возраст</td>
-                <td th:text="${principalUser.email}">Email</td>
-                <td th:text="${principalUser.username}">Email</td>
+                <td th:text="${principalUser.getId()}">Id</td>
+                <td th:text="${principalUser.getName()}">Имя</td>
+                <td th:text="${principalUser.getLastName()}">Фамилия</td>
+                <td th:text="${principalUser.getAge()}">Возраст</td>
+                <td th:text="${principalUser.getEmail()}">Email</td>
+                <td th:text="${principalUser.getUsername()}">Email</td>
                 <td>
-         <span th:each="role : ${principalUser.getRoles()}"
+         <span th:each="role : ${principalUser.getAuthorities()}"
                th:switch="${role.getRole()}">
                <span th:case="'ROLE_ADMIN'">ADMIN</span>
                <span th:case="'ROLE_USER'">USER</span>
