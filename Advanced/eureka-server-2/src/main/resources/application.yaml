@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8767
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
