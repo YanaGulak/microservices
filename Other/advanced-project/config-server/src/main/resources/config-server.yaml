@@ -1,0 +1,20 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: git
+  config:
+    activate:
+        on-profile: git
+    cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/DanikWRT/Microservices_danche
+            searchPaths: "/tree/master/ms-config-properties/{application}/{profile}"
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
